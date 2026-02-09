@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spider-Man</title>
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Protest+Guerrilla&display=swap');
+
+        * {
+            padding: 0;
+            margin: 0;
+            text-decoration: none;
+            list-style: none;
+            box-sizing: border-box;
+            font-family: "Protest Guerrilla", sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background-color: #02010a;
+            color: #ffffff;
+            overflow-x: hidden;
+            animation: fadeInBody 1.2s ease-out forwards;
+        }
+
+        .btn-nav,
+        .btn {
+            padding: 12px 18px;
+            border: none;
+            outline: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .btn-nav:hover,
+        .btn:hover {
+            transform: translateY(-2px) scale(1.03);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.45);
+        }
+
+        section {
+            width: 100%;
+            min-height: 100vh;
+            background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.9)),
+                url('https://img.freepik.com/free-photo/glowing-cityscape-night-modern-architecture-illuminated-generated-by-ai_188544-21237.jpg?t=st=1727076915~exp=1727080515~hmac=db4e4d9d92c6aea6d75f86bff4266edfd4bcb5386a69c5e3cbfb9684226ae128&w=1060');
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            padding: 24px clamp(16px, 5vw, 80px);
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+        }
+
+        header {
+            height: 60px;
+            width: 100%;
+            background-color: rgba(255, 255, 255, .12);
+            backdrop-filter: blur(8px);
+            border-radius: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 24px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+            animation: slideDown 0.9s ease-out forwards;
+        }
+
+        h3.logo {
+            font-size: clamp(20px, 2.2vw, 26px);
+            color: #fff;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            animation: logoPulse 3s ease-in-out infinite;
+        }
+
+        nav ul {
+            display: flex;
+            gap: clamp(16px, 3vw, 32px);
+        }
+
+        nav ul li a {
+            color: #fff;
+            font-size: 14px;
+            font-weight: 400;
+            letter-spacing: 1px;
+            position: relative;
+            padding-bottom: 4px;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background-color: #ff1b22;
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: #ff1b22;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        header .btn-nav {
+            background-color: #9c0001;
+            font-size: 14px;
+            font-weight: 500;
+            color: #ffffff;
+            white-space: nowrap;
+        }
+
+        header .btn-nav:hover {
+            background-color: #ff1b22;
+        }
+
+        main {
+            position: relative;
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: visible;
+            padding-block: clamp(24px, 8vh, 64px);
+        }
+
+        h1 {
+            position: absolute;
+            color: #ffffff;
+            font-size: clamp(60px, 12vw, 230px);
+            font-family: "Protest Guerrilla", sans-serif;
+            -webkit-text-stroke: 1px #ffffff;
+            text-align: center;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            animation: titlePulse 6s ease-in-out infinite alternate;
+        }
+
+        h1.front {
+            color: transparent;
+            z-index: 3;
+        }
+
+        h1.back {
+            z-index: 1;
+            filter: drop-shadow(0 0 30px rgba(255, 0, 0, 0.65));
+            opacity: 0.6;
+        }
+
+        main img  {
+            position: absolute;
+            z-index: 5;
+            width: clamp(220px, 35vw, 500px);
+            opacity: 0.6; /* make middle Spider-Man transparent */
+            animation: spideyFloat 4s ease-in-out infinite;
+            transform-origin: center bottom ;
+            
+        }
+
+        .footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 32px;
+            margin-top: auto;
+            padding-block: 16px;
+        }
+
+        .footer .left {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 16px;
+            max-width: 640px ;
+        }
+
+        .footer .left .leftbt {
+            background-color: transparent;
+            border: 1px solid #ffffff;
+            color: #ffffff;
+            font-weight: 400;
+            font-size: 14px;
+            border-radius: 200px;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .footer .left .leftbt:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .left p {
+            color: #ffffff;
+            max-width: 100%;
+            font-size: 14px;
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+        .footer .right .rightbt{
+            background-color: transparent;
+            color: #ffffff;
+            font-size: 16px;
+            font-weight: 100;
+        }
+
+        /* ANIMATIONS */
+        @keyframes fadeInBody {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes logoPulse {
+            0% {
+                transform: translateY(0);
+                text-shadow: 0 0 6px rgba(255, 255, 255, 0.4);
+            }
+            50% {
+                transform: translateY(-2px);
+                text-shadow: 0 0 14px rgba(255, 27, 34, 0.9);
+            }
+            100% {
+                transform: translateY(0);
+                text-shadow: 0 0 6px rgba(255, 255, 255, 0.4);
+            }
+        }
+        
+        @keyframes titlePulse {
+            0% {
+                text-shadow: 0 0 12px rgba(255, 27, 34, 0.6), 0 0 30px rgba(0, 0, 0, 0.9);
+            }
+            50% {
+                text-shadow: 0 0 20px rgba(255, 27, 34, 1), 0 0 50px rgba(0, 0, 0, 1);
+            }
+            100% {
+                text-shadow: 0 0 10px rgba(255, 27, 34, 0.5), 0 0 25px rgba(0, 0, 0, 0.9);
+            }
+        }
+
+        @keyframes spideyFloat {
+            0% {
+                transform: translateY(0) scale(1) rotate(0deg);
+                filter: drop-shadow(0 0 12px rgba(0, 0, 0, 0.8));
+            }
+            50% {
+                transform: translateY(-18px) scale(1.03) rotate(-2deg);
+                filter: drop-shadow(0 0 22px rgba(255, 27, 34, 0.8));
+            }
+            100% {
+                transform: translateY(0) scale(1) rotate(0deg);
+                filter: drop-shadow(0 0 12px rgba(0, 0, 0, 0.8));
+            }
+        }
+
+        /* RESPONSIVE LAYOUTS */
+        @media (max-width: 900px) {
+            header {
+                padding-inline: 16px;
+            }
+
+            nav ul {
+                gap: 16px;
+            }
+
+            main {
+                padding-block: 32px;
+            }
+
+            h1 {
+                font-size: clamp(48px, 13vw, 120px);
+            }
+
+            main img {
+                width: clamp(200px, 45vw, 320px);
+            }
+
+            .footer {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .footer .right {
+                align-self: stretch;
+                display: flex;
+                justify-content: flex-end;
+            }
+        }
+
+        @media (max-width: 640px) {
+            section {
+                padding: 16px 16px 24px;
+                gap: 20px;
+            }
+
+            header {
+                height: auto;
+                flex-wrap: wrap;
+                gap: 8px;
+            }
+
+            nav ul {
+                display: none;
+            }
+
+            main {
+                padding-block: 40px;
+            }
+
+            h1 {
+                font-size: clamp(40px, 16vw, 72px);
+                letter-spacing: 2px;
+            }
+
+            main img {
+                width: clamp(180px, 60vw, 260px);
+                position: relative;
+                margin-top: 40px;
+            }
+
+            .footer {
+                padding-top: 8px;
+                gap: 16px;
+            }
+
+            .footer .right {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .footer .right .rightbt {
+                width: 100%;
+                text-align: center;
+            }
+        }
+        @media (max-width:366px) {
+            section {
+                padding: 16px 16px 24px;
+                gap: 20px;
+            }
+
+            header {
+                height: auto;
+                flex-wrap: wrap;
+                gap: 8px;
+            }
+
+            nav ul {
+                display: none;
+            }
+
+            .btn-nav{
+                height: auto;
+                
+            }
+
+            main {
+                padding-block: 40px;
+            }
+
+            h1 {
+                font-size: clamp(40px, 16vw, 72px);
+                letter-spacing: 2px;
+            }
+
+            main img {
+                width: clamp(180px, 60vw, 260px);
+                position: relative;
+                margin-top: 40px;
+            }
+
+            .footer {
+                padding-top: 8px;
+                gap: 16px;
+            }
+
+            .footer .right {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .footer .right .rightbt {
+                width: 100%;
+                text-align: center;
+            }
+        }
+        
+    </style>
+</head>
+<body>
+    <section>
+        <header>
+            <h3 class="logo">Spider-Man</h3>
+            <nav>
+                <ul>
+                    <li><a href="">Home</a></li>
+                    <li><a href="">Tickets</a></li>
+                    <li><a href="">Booking</a></li>
+                    <li><a href="">Contact</a></li>
+                </ul>
+            </nav>
+            <button class="btn-nav">Get Your Tickets Now</button>
+        </header>
+        <main>
+            <h1 class="front">SPIDER-MAN</h1>
+            <img src="https://clipart-library.com/data_images/162012.png "alt="" >
+            <h1 class="back">SPIDER-MAN</h1>
+        </main>
+
+        <div class="footer">
+            <div class="left">
+                <button class="btn leftbt">Origin</button>
+                <p>Spider-Man has become an iconic symbol of heroism and resilience, inspiring countless fans and adaptations across comics, movies, and merchandise. Join Spider-Man as he fights for justice and discovers what it truly means to be a hero!</p>            
+                </div>
+            <div class="right">
+                <button class="btn rightbt">Book Now</button>
+            </div>
+        </div>
+        
+
+    </section>
+</body>
+</html>
