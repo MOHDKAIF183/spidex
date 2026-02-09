@@ -23,6 +23,3 @@ This project is ideal for showcasing front-end skills in your portfolio or resum
 - **CSS3**
 - **Responsive Design**
 - **CSS Animations**
-
-## 📁 Project Structure
-
